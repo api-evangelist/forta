@@ -1,0 +1,37 @@
+generated: '2026-07-19'
+method: searched
+source: https://docs.forta.network/en/latest/api-keys/
+docs: https://docs.forta.network/en/latest/api-keys/
+description: >-
+  Authentication model for the Forta GraphQL API. Requests are authenticated
+  with a Bearer API key in the HTTP Authorization header. API keys are created
+  in the Forta App (app.forta.network) after signing in with a wallet; up to 10
+  keys per account, and a key cannot be recovered once lost. For local bot
+  development the key can be stored in forta.config.json under `fortaApiKey`.
+  This is a static API-key (bearer) scheme, not OAuth 2.0 / OIDC, so there is no
+  scope surface.
+summary:
+  types: [http-bearer-apikey]
+  api_key_in: [header]
+  oauth2_flows: []
+schemes:
+- name: BearerApiKey
+  type: http
+  scheme: bearer
+  in: header
+  header: Authorization
+  format: 'Bearer <api_key>'
+  key_management: https://docs.forta.network/en/latest/api-keys/
+  provisioning: >-
+    Sign into the Forta App with a wallet, open "My API Keys", "Create new API
+    key" (max 10). Keys are not recoverable if lost.
+  example: |
+    curl POST --header "Authorization: Bearer <api_key>" \
+      --header "content-type: application/json" \
+      --url "https://api.forta.network/graphql"
+  sources: [https://docs.forta.network/en/latest/api-keys/]
+notes: >-
+  GraphQL API access requires a paid plan. Bot-to-scanner and
+  scanner-to-network communication in the node software uses JWT tokens (the
+  SDKs expose generate/verify JWT helpers) — that is a separate, node-internal
+  trust model from the developer-facing API key documented here.
