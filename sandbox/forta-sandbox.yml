@@ -1,0 +1,30 @@
+generated: '2026-07-19'
+method: searched
+source: https://docs.forta.network/en/latest/api/
+docs: https://docs.forta.network/en/latest/api/
+description: >-
+  Forta's interactive query surface for the GraphQL API. The documentation
+  exposes an Apollo GraphQL Sandbox so developers can compose and run `alerts`
+  queries against the schema interactively before wiring them into code. Bot
+  developers also get a full local sandbox: the Bot SDK CLI runs bots locally
+  against live or replayed block/transaction data.
+consoles:
+- name: Apollo GraphQL Sandbox
+  type: graphql-explorer
+  surface: https://api.forta.network/graphql
+  docs: https://docs.forta.network/en/latest/api/
+  auth: Requires a Bearer API key (paid plan) for live data.
+  notes: Interactive schema exploration and query testing.
+local_testing:
+- name: Bot SDK local run
+  type: local-runtime
+  command: forta-agent run
+  docs: https://docs.forta.network/en/latest/forta-quickstart/
+  notes: >-
+    Run a detection bot locally against a specific transaction/block or a range
+    before publishing to the network.
+test_values: []
+notes: >-
+  No published static "test key" / magic-value sandbox for the alerts API; the
+  same API key works against real data and access is gated by plan. No fabricated
+  test values recorded.

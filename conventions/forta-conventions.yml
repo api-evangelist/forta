@@ -1,0 +1,62 @@
+generated: '2026-07-19'
+method: searched
+source: >-
+  https://docs.forta.network/en/latest/api/ and
+  https://docs.forta.network/en/latest/api-keys/ — the cross-cutting
+  request/response conventions of the Forta GraphQL API.
+description: >-
+  How the Forta GraphQL API behaves across queries: transport, authentication,
+  pagination, and error signaling. Forta exposes a single GraphQL endpoint
+  rather than a versioned REST surface, so several REST conventions
+  (idempotency keys, per-resource paths, HTTP verbs) do not apply.
+base_url: https://api.forta.network/graphql
+api_style: GraphQL over HTTPS (POST, application/json)
+
+authentication:
+  scheme: Bearer API key in the Authorization header
+  key_types: [api-key]
+  docs: https://docs.forta.network/en/latest/api-keys/
+  detail: authentication/forta-authentication.yml
+
+idempotency:
+  supported: false
+  rationale: >-
+    The public API surface is read-only GraphQL queries (e.g. `alerts`), which
+    are inherently idempotent; there are no write mutations and thus no
+    Idempotency-Key contract.
+
+pagination:
+  style: cursor
+  model: Relay-style connection
+  request_params:
+    first: page size (number of results)
+    after: cursor to fetch results after (endCursor from the prior page)
+  response_fields:
+    pageInfo.hasNextPage: whether more results exist
+    pageInfo.endCursor: '{ alertId, blockNumber } compound cursor to pass as `after`'
+  docs: https://docs.forta.network/en/latest/api/
+
+versioning:
+  scheme: none
+  detail: >-
+    A single unversioned GraphQL endpoint; schema evolution is additive in the
+    GraphQL manner (new fields/types) rather than versioned URLs.
+
+error_envelope:
+  style: graphql
+  detail: >-
+    Errors are returned in the standard GraphQL top-level `errors[]` array
+    alongside a possibly-partial `data` object; HTTP 200 is typical even for
+    query-level errors. Transport/auth failures (401/403) surface as HTTP
+    status codes.
+
+rate_limiting:
+  detail: >-
+    API access is gated by paid plan; documented plan tiers describe API access
+    rather than explicit per-request rate-limit headers. No public rate-limit
+    header contract is documented.
+
+related_artifacts:
+  authentication: authentication/forta-authentication.yml
+  data_model: data-model/forta-data-model.yml
+  webhooks: asyncapi/forta-webhooks.yml

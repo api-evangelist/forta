@@ -1,0 +1,47 @@
+generated: '2026-07-19'
+method: searched
+source: >-
+  https://docs.forta.network/en/latest/subscribing/ and
+  https://docs.forta.network/en/latest/subscribing-to-bot/
+spec_type: Webhooks
+docs: https://docs.forta.network/en/latest/subscribing/
+description: >-
+  Forta's real-time alert delivery surface. Through the Forta App
+  (app.forta.network), users subscribe to detection-bot alerts and receive them
+  as push notifications over one of five channels — email, Slack, Telegram,
+  Discord, or a custom HTTP webhook. Webhook subscriptions POST the triggering
+  alert to a user-supplied URL when a matching alert fires. No published
+  AsyncAPI document exists; this captures the webhook/notification catalog.
+subscription_model:
+  auth: Connect a MetaMask wallet and sign a message to authenticate.
+  targets:
+  - Bot ID (subscribe to all alerts from a specific detection bot)
+  - Contract address (subscribe to alerts referencing an address)
+  filters:
+  - Address filter (only alerts related to a specific address)
+  - Severity / finding-type filtering via bot configuration
+  docs: https://docs.forta.network/en/latest/subscribing/
+channels:
+- name: webhook
+  transport: http
+  direction: outbound
+  trigger: A subscribed detection bot emits a matching alert.
+  payload: The Forta alert object (see data-model/forta-data-model.yml).
+- name: email
+  transport: email
+  direction: outbound
+- name: slack
+  transport: slack
+  direction: outbound
+- name: telegram
+  transport: telegram
+  direction: outbound
+- name: discord
+  transport: discord
+  direction: outbound
+availability: >-
+  Per Forta docs, all plans include subscription to notifications via Slack,
+  Email, Telegram, Discord, or a custom Webhook.
+related_artifacts:
+  data_model: data-model/forta-data-model.yml
+  grpc_alert: grpc/forta-alert.proto

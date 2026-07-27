@@ -1,22 +1,133 @@
 aid: forta
 name: Forta
-description: Forta is a company surfaced as a portfolio company of a16z and added to the API Evangelist
-  network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: >-
+  Forta is a decentralized, real-time detection network for monitoring the
+  security and operational health of Web3 systems. Spun out of OpenZeppelin and
+  backed by a16z crypto, Forta runs thousands of community-built detection bots
+  across independent scan nodes that inspect every transaction and block on
+  chains such as Ethereum, Polygon, BNB Chain, Avalanche, Arbitrum and Optimism,
+  emitting alerts that DeFi protocols and security teams subscribe to via email,
+  Slack, Telegram, Discord and webhooks. Developers query alerts and threat
+  intelligence through a GraphQL API, build and deploy detection bots with the
+  Forta Bot SDK and CLI (JavaScript/TypeScript and Python), and the Forta
+  Firewall product uses the Forta Chain (a Layer 3 network) to block
+  smart-contract exploits before they execute.
 url: https://raw.githubusercontent.com/api-evangelist/forta/refs/heads/main/apis.yml
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://avatars.githubusercontent.com/u/87823599?v=4
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - a16z
-x-tier: stub
-x-tier-reason: portfolio-lead
+x-tier: profiled
+x-tier-reason: enriched-from-public-developer-surface
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-19'
 tags:
 - Company
-apis: []
+- Security
+- Blockchain
+- Web3
+- Monitoring
+- Threat Detection
+- DeFi
+- GraphQL
+- Alerts
+- Smart Contracts
+apis:
+- aid: forta:forta-graphql-api
+  name: Forta GraphQL API
+  description: >-
+    The Forta GraphQL API exposes the network's alerts and blockchain project
+    threat-intelligence data. A single GraphQL endpoint accepts POST queries
+    authenticated with a Bearer API key; the primary root query is `alerts`,
+    with Relay-style cursor pagination (pageInfo/endCursor/hasNextPage). Paid
+    plan and API key required.
+  humanURL: https://docs.forta.network/en/latest/api/
+  baseURL: https://api.forta.network/graphql
+  tags:
+  - Alerts
+  - Security
+  - GraphQL
+  properties:
+  - url: https://docs.forta.network/en/latest/
+    type: Documentation
+  - url: https://docs.forta.network/en/latest/api/
+    type: APIReference
+  - url: https://api.forta.network/graphql
+    type: GraphQL
+  - url: authentication/forta-authentication.yml
+    type: Authentication
+  - url: conventions/forta-conventions.yml
+    type: Conventions
+  - url: data-model/forta-data-model.yml
+    type: DataModel
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+common:
+- type: DomainSecurity
+  url: security/forta-domain-security.yml
+- url: https://forta.org
+  type: Website
+- url: https://docs.forta.network/
+  type: DeveloperPortal
+- url: https://docs.forta.network/en/latest/
+  type: Documentation
+- url: https://docs.forta.network/en/latest/api/
+  type: APIReference
+- url: https://docs.forta.network/en/latest/forta-quickstart/
+  type: GettingStarted
+- url: https://www.forta.org/blog
+  type: Blog
+- url: https://github.com/forta-network
+  type: GitHubOrganization
+- url: https://discord.gg/KACdTEutQq
+  type: Support
+- url: https://app.forta.network/
+  type: SignUp
+- url: https://www.forta.org/terms-of-use
+  type: TermsOfService
+- url: https://www.forta.org/privacy-policy
+  type: PrivacyPolicy
+- url: authentication/forta-authentication.yml
+  type: Authentication
+- url: packages/forta-packages.yml
+  type: Packages
+- url: packages/forta-packages.yml
+  type: SDKs
+- url: cli/forta-cli.yml
+  type: CLI
+- url: grpc/forta-agent.proto
+  type: Protobuf
+- url: conventions/forta-conventions.yml
+  type: Conventions
+- url: data-model/forta-data-model.yml
+  type: DataModel
+- url: conformance/forta-conformance.yml
+  type: Conformance
+- url: sandbox/forta-sandbox.yml
+  type: Sandbox
+- url: asyncapi/forta-webhooks.yml
+  type: Webhooks
+- url: llms/forta-llms.txt
+  type: LLMsTxt
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence

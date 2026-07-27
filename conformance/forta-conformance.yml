@@ -1,0 +1,36 @@
+generated: '2026-07-19'
+method: derived
+source: >-
+  Derived from the Forta API surface (GraphQL, Bearer key) documented at
+  docs.forta.network and the published gRPC protobuf in grpc/. No published
+  compliance-certification program (SOC 2 / ISO 27001 / PCI / HIPAA / FedRAMP)
+  was found, so no Compliance pointer is wired.
+description: >-
+  Cross-cutting standards conformance for Forta's developer surface. Forta is a
+  decentralized Web3 protocol; its API is GraphQL with Relay-style cursor
+  pagination and static Bearer-key auth, and its node/bot layer uses gRPC/proto3.
+standards:
+- id: graphql
+  conforms: true
+  evidence: Single GraphQL endpoint at https://api.forta.network/graphql (POST).
+- id: relay-cursor-connections
+  conforms: true
+  evidence: >-
+    Pagination uses pageInfo { hasNextPage endCursor } with an `after` cursor
+    argument, following the Relay Connections pattern.
+- id: grpc
+  conforms: true
+  evidence: >-
+    proto3 gRPC service definitions (Agent service, Alert messages) published in
+    forta-core-go/protocol (see grpc/forta-agent.proto, grpc/forta-alert.proto).
+- id: oauth2
+  conforms: false
+  evidence: API uses a static Bearer API key, not OAuth 2.0.
+- id: oidc
+  conforms: false
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: Errors follow the GraphQL top-level errors[] convention, not RFC 9457.
+- id: rest
+  conforms: false
+  evidence: No REST/OpenAPI surface; the API is GraphQL-only.

@@ -1,0 +1,69 @@
+generated: '2026-07-19'
+method: searched
+source: >-
+  https://docs.forta.network/en/latest/api/ (GraphQL alerts schema) and the
+  published gRPC protobuf in grpc/forta-alert.proto / grpc/forta-agent.proto.
+description: >-
+  Entity-relationship model for Forta's alert and detection domain, derived
+  from the GraphQL `alerts` query schema and the network's protobuf alert
+  definitions. Alerts are the central object, produced by detection bots
+  (agents), scoped to a source block/transaction on a specific chain.
+entities:
+- name: Alert
+  description: >-
+    A finding emitted by a detection bot. Key fields: alertId, name, protocol,
+    findingType, severity, metadata, createdAt, source, addresses, labels.
+  key: alertId
+  fields_note: severity and findingType are enumerations; metadata is a free key/value map.
+- name: Bot
+  aliases: [Agent]
+  description: >-
+    A detection bot (agent) that evaluates transactions/blocks/alerts and emits
+    alerts. Identified by a bot id (deployment hash). Handlers: EvaluateTx,
+    EvaluateBlock, EvaluateAlert (see grpc/forta-agent.proto).
+  key: id
+- name: Block
+  description: A blockchain block the alert was sourced from.
+  key: [chainId, number]
+- name: Transaction
+  description: A transaction within a block that triggered evaluation.
+  key: hash
+- name: Label
+  description: >-
+    An entity label (address/type/confidence) attached to an alert, used for
+    threat-intel enrichment and datasets.
+  key: [entity, label]
+- name: Project
+  description: >-
+    A blockchain project / protocol that alerts and threat intelligence can be
+    associated with (available on paid plans).
+  key: id
+relationships:
+- from: Alert
+  to: Bot
+  type: belongs_to
+  via: bot.id
+- from: Alert
+  to: Block
+  type: belongs_to
+  via: source.block
+- from: Alert
+  to: Transaction
+  type: belongs_to
+  via: source.transactionHash
+- from: Alert
+  to: Label
+  type: has_many
+  via: labels
+- from: Bot
+  to: Alert
+  type: has_many
+  via: bot.id
+- from: Project
+  to: Alert
+  type: has_many
+  via: protocol
+notes: >-
+  Field names follow the GraphQL alerts schema documented at
+  docs.forta.network/en/latest/api/. The protobuf messages in grpc/ are the
+  wire-level source of truth for Alert/Finding/Label shapes.

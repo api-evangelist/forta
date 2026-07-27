@@ -1,0 +1,32 @@
+generated: '2026-07-19'
+method: searched
+source: Live probes of /.well-known/* on the Forta API and web hosts.
+description: >-
+  Well-known discovery probe for Forta hosts. The API host
+  (api.forta.network) sits behind Cloudflare and returns 403 to automated
+  clients for all /.well-known/ paths; the marketing/docs hosts return 404.
+  No well-known discovery document (security.txt, openid-configuration,
+  oauth-authorization-server, api-catalog, ai-plugin.json) is currently
+  served. Recorded for auditability; no canonical WellKnown pointer is wired
+  because nothing resolved to 200.
+hosts:
+- host: https://api.forta.network
+  documents:
+  - path: /.well-known/security.txt
+    status: 403
+  - path: /.well-known/openid-configuration
+    status: 403
+  - path: /.well-known/oauth-authorization-server
+    status: 403
+  - path: /.well-known/api-catalog
+    status: 403
+- host: https://forta.network
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+- host: https://forta.org
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/llms.txt
+    status: 404

@@ -1,0 +1,51 @@
+generated: '2026-07-19'
+method: searched
+source: >-
+  https://docs.forta.network/en/latest/ plus the public npm and PyPI registries.
+  Registry versions and names verified against https://registry.npmjs.org and
+  https://pypi.org/pypi/<name>/json at fetch time. These are the first-party
+  Forta detection-bot SDKs and CLI; source repositories live under the
+  forta-network / forta-protocol GitHub organizations.
+description: >-
+  First-party Forta client libraries and CLI tooling for building, running and
+  deploying detection bots against the Forta Network. The SDK doubles as the
+  bot-development CLI (init/run/publish). Note: the Forta GraphQL alerts API is
+  consumed over plain HTTP with a Bearer key and has no dedicated client SDK.
+packages:
+- language: javascript
+  registry: npm
+  name: forta-agent
+  url: https://www.npmjs.com/package/forta-agent
+  source: https://github.com/forta-protocol/forta-agent-sdk
+  install: npm install forta-agent
+  version: 0.1.48
+  official: true
+  notes: JavaScript/TypeScript Forta Agent (detection bot) SDK and CLI tool.
+- language: python
+  registry: pypi
+  name: forta-agent
+  url: https://pypi.org/project/forta-agent/
+  source: https://github.com/forta-network/forta-agent-python-sdk
+  install: pip install forta-agent
+  version: 0.1.27
+  official: true
+  notes: Python Forta Agent SDK.
+- language: python
+  registry: pypi
+  name: forta-bot-sdk
+  url: https://pypi.org/project/forta-bot-sdk/
+  source: https://github.com/forta-network/forta-bot-sdk
+  install: pip install forta-bot-sdk
+  version: 0.2.3
+  official: true
+  notes: Newer Forta Detection Bot Python SDK (v2 bot framework).
+- language: typescript
+  registry: github
+  name: forta-bot-sdk
+  url: https://github.com/forta-network/forta-bot-sdk
+  source: https://github.com/forta-network/forta-bot-sdk
+  install: git clone https://github.com/forta-network/forta-bot-sdk
+  official: true
+  notes: >-
+    Current TypeScript Forta Detection Bot SDK and CLI (successor to
+    forta-agent). Bundles the bot-development CLI.

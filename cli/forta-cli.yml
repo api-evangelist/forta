@@ -1,0 +1,43 @@
+generated: '2026-07-19'
+method: searched
+source: >-
+  https://docs.forta.network/en/latest/forta-quickstart/ and
+  https://github.com/forta-network/forta-bot-sdk
+docs: https://docs.forta.network/en/latest/forta-quickstart/
+description: >-
+  Forta ships a first-party detection-bot CLI bundled with the Bot SDK
+  (historically `forta-agent`, now `forta-bot` in the TypeScript
+  forta-bot-sdk). It scaffolds, runs, tests, and deploys detection bots to the
+  Forta Network. The CLI is the primary developer workflow; the binary is
+  catalogued in packages/forta-packages.yml.
+binary: forta-agent
+successor_binary: forta-bot
+install:
+- method: npm
+  command: npm install -g forta-agent
+- method: npx
+  command: npx forta-agent init
+- method: python
+  command: pip install forta-bot-sdk
+commands:
+- name: init
+  summary: Scaffold a new detection-bot project (JS/TS or Python).
+- name: run
+  summary: Run the bot locally against live/JSON-RPC block or transaction data.
+- name: test
+  summary: Execute the bot's unit tests.
+- name: publish
+  summary: Build, push the bot image, and register/deploy it to the Forta Network.
+- name: disable
+  summary: Disable a deployed bot.
+- name: enable
+  summary: Re-enable a previously disabled bot.
+- name: keyfile
+  summary: Create/manage the deployment keyfile used to sign bot manifests.
+key_flows:
+- Scaffold with `forta-agent init`, iterate with `forta-agent run --tx <hash>`,
+  publish with `forta-agent publish`.
+notes: >-
+  The CLI reads local configuration (including the GraphQL `fortaApiKey`) from
+  forta.config.json. Command surface is derived from the quickstart and the
+  forta-bot-sdk README; consult the docs for the current authoritative flag set.
